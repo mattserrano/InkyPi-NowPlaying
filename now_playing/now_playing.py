@@ -30,7 +30,7 @@ class SubsonicProvider:
             "s": salt,
             "f": "json",
             "c": "Inky-Pi",
-            "v": "1.16.1"
+            "v": "1.8.0"
         }
     
     def get_now_playing(self):
