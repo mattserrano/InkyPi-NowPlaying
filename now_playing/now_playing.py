@@ -77,6 +77,7 @@ class SubsonicProvider:
             "artist": now_playing.get("artist") if now_playing else "",
             "album": now_playing.get("album") if now_playing else "",
             "cover_art_url": cover_art_url,
+            "stared": now_playing.get("starred") if now_playing else "",
             "dimensions": dimensions,
             "display_id3_metadata": settings.get("display-id3-metadata"),
             "font_scale": FONT_SIZES.get(settings.get('fontSize', 'normal'), 1),

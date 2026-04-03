@@ -15,6 +15,11 @@
 </div>
 
 <div class="form-group">
+    <label for="display-starred" class="form-label">Display favorite status:</label>
+    <input type="checkbox" id="display-starred" name="display-starred" checked class="form-input">
+</div>
+
+<div class="form-group">
     <span style="color: var(--text-primary);">Warning: Do not run with untrusted URLs, as it may pose a security risk. This may also fail if the image takes too long to load.</span>
 </div>
 
@@ -24,6 +29,7 @@
         if (loadPluginSettings) {
             document.getElementById('url').value = pluginSettings.url;
             document.getElementById('display-id3-metadata').checked = pluginSettings['display-id3-metadata'];
+            document.getElementById('display-starred').checked = pluginSettings['display-starred'];
         }
     });
 </script>
