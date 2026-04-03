@@ -36,4 +36,5 @@
   font-size: 4rem;
   max-width: 100%;
   font-size: min(10cqh, 8cqi);
+  text-overflow: ellipsis;
 }
