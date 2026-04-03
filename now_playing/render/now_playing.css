@@ -18,6 +18,7 @@
   justify-content: center;
   align-items: center;
   height: 100%;
+  max-width: 50%;
 }
 
 .entry-metadata-container {
@@ -25,7 +26,6 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  min-width: 40%;
   gap: 1dvh;
   font-family: "Jost";
   container-type: size;
