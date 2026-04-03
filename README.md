@@ -8,6 +8,10 @@ An InkyPi plugin to display album art and song metadata.
 
 ## 📸 Screenshot
 
+<img width="1059" height="920" alt="Screenshot 2026-04-03 at 2 33 56 AM" src="https://github.com/user-attachments/assets/a52e93c7-e5fd-4479-a9bf-5c1ba36beef5" />
+<img width="899" height="829" alt="Screenshot 2026-04-03 at 2 35 18 AM" src="https://github.com/user-attachments/assets/015bca0d-ac9b-4626-a4b4-0cd9b7856996" />
+
+
 ## 🛠️ Installation
 
 Currently, Subsonic media servers are the only supported music provider.
