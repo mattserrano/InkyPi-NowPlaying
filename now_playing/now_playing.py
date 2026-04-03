@@ -52,6 +52,23 @@ class SubsonicProvider:
         logging.info(f"Parsed now playing entry: {now_playing}")
         return now_playing
     
+    def get_song_details(self, song_id):
+        url = f"{self.base_url}/rest/getSong"
+        params = self.request_params()
+        params["id"] = song_id
+
+        logger.info(f"Fetching song details for song ID {song_id} from URL: {url}")
+        response = self.session.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json().get("subsonic-response")
+        
+        logger.info(f"Subsonic getSong response: {data}")
+        assert data.get("status") == "ok", data.get("error", "Subsonic API returned an unknown error")
+        
+        song_details = data.get("song")
+        logging.info(f"Parsed song details: {song_details}")
+        return song_details
+    
     def get_cover_art_url(self, cover_id, dimensions):
         url = f"{self.base_url}/rest/getCoverArt"
         params = self.request_params()
@@ -66,18 +83,22 @@ class SubsonicProvider:
     
     def get_image(self,  dimensions, settings, renderer, resize=True):
         cover_art_url = None
+        song_details = None
         now_playing = self.get_now_playing()
 
         if now_playing and "coverArt" in now_playing:
             cover_id = now_playing["coverArt"]
             cover_art_url = self.get_cover_art_url(cover_id, dimensions)
-           
+
+        if now_playing and settings.get("display-starred"):
+            song_details = self.get_song_details(now_playing.get("id"))
+
         template_params = {
             "title": now_playing.get("title") if now_playing else "No music playing",
             "artist": now_playing.get("artist") if now_playing else "",
             "album": now_playing.get("album") if now_playing else "",
             "cover_art_url": cover_art_url,
-            "stared": now_playing.get("starred") if now_playing else "",
+            "starred": song_details.get("starred") if song_details else "",
             "dimensions": dimensions,
             "display_id3_metadata": settings.get("display-id3-metadata"),
             "font_scale": FONT_SIZES.get(settings.get('fontSize', 'normal'), 1),
