@@ -16,9 +16,9 @@ An InkyPi plugin to display album art and song metadata.
 
 Currently, Subsonic media servers are the only supported music provider.
 
-1. Clone this plugin into your `InkyPi/src/plugins/` directory:
+1. Use the inkypi plugin CLI to install this plugin:
 ```
-git clone https://github.com/mattserrano/InkyPi-NowPlaying /path/to/InkyPi/src/plugins/
+inkypi plugin install now_playing https://github.com/mattserrano/InkyPi-NowPlaying
 ```
 2. Add `SUBSONIC_USER` and `SUBSONIC_PASS` to the InkyPi `.env` file (or via the API key manager)
 3. Add your Subsonic server URL in the plugin settings
