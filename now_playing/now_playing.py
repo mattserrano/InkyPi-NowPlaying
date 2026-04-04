@@ -90,7 +90,7 @@ class SubsonicProvider:
             cover_id = now_playing["coverArt"]
             cover_art_url = self.get_cover_art_url(cover_id, dimensions)
 
-        if now_playing and settings.get("display-starred"):
+        if now_playing and settings.get("displayStarred"):
             song_details = self.get_song_details(now_playing.get("id"))
 
         template_params = {
@@ -101,7 +101,7 @@ class SubsonicProvider:
             "starred": song_details.get("starred") if song_details else "",
             "star_symbol": settings.get("starSymbol", "★"),
             "dimensions": dimensions,
-            "display_id3_metadata": settings.get("display-id3-metadata"),
+            "display_id3_metadata": settings.get("displayID3Metadata"),
             "font_scale": FONT_SIZES.get(settings.get('fontSize', 'normal'), 1),
             "plugin_settings": settings
         }

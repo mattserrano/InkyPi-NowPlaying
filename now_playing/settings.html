@@ -15,8 +15,8 @@
 </div>
 
 <div class="form-group">
-    <label for="display-id3-metadata" class="form-label">Display song ID3 metadata:</label>
-    <input type="checkbox" id="display-id3-metadata" name="display-id3-metadata" checked class="form-input">
+    <label for="displayID3Metadata" class="form-label">Display song ID3 metadata:</label>
+    <input type="checkbox" id="displayID3Metadata" name="displayID3Metadata" checked class="form-input">
 </div>
 
     <div class="form-group">
@@ -34,8 +34,8 @@
     document.addEventListener('DOMContentLoaded', () => {        
         if (loadPluginSettings) {
             document.getElementById('url').value = pluginSettings.url;
-            document.getElementById('display-id3-metadata').checked = pluginSettings['display-id3-metadata'];
-            document.getElementById('display-starred').checked = pluginSettings['display-starred'];
+            document.getElementById('displayID3Metadata').checked = pluginSettings['displayID3Metadata'];
+            document.getElementById('displayStarred').checked = pluginSettings['displayStarred'];
             document.getElementById('starSymbol').value = pluginSettings['starSymbol'];
         }
     });
