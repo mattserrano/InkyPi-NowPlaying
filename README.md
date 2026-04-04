@@ -1,5 +1,5 @@
 # InkyPi-NowPlaying
-An InkyPi plugin to display album art and song metadata.
+An InkyPi plugin to display alhum cover art on Subsonic compatible media servers.
 
 ## 🎵 Features
 
