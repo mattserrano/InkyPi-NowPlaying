@@ -19,10 +19,15 @@
     <input type="checkbox" id="display-id3-metadata" name="display-id3-metadata" checked class="form-input">
 </div>
 
-<div class="form-group">
-    <label for="display-starred" class="form-label">Display favorite status:</label>
-    <input type="checkbox" id="display-starred" name="display-starred" checked class="form-input">
-</div>
+    <div class="form-group">
+        <label class="form-label" for="starSymbol">Star symbol:</label>
+        <div class="form-group">
+            <input type="radio" id="starSymbol" name="starSymbol" value="★">
+            <label>Star: ★</label>
+            <input type="radio" id="starSymbol" name="starSymbol" value="♥">
+            <label>Heart: ♥</label>
+        </div>
+    </div>
 
 <script>
     // populate form values from plugin settings
@@ -31,6 +36,7 @@
             document.getElementById('url').value = pluginSettings.url;
             document.getElementById('display-id3-metadata').checked = pluginSettings['display-id3-metadata'];
             document.getElementById('display-starred').checked = pluginSettings['display-starred'];
+            document.getElementById('starSymbol').value = pluginSettings['starSymbol'];
         }
     });
 </script>
