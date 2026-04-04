@@ -3,19 +3,20 @@
 {% block content %}
 
 <div class="now-playing-container" style="--font-scale: {{ font_scale }};">
-    <div id="album-art-container">
+    <div>
         {% if cover_art_url %}
-        <img id="album-art" src="{{ cover_art_url }}" alt="Album cover" />
+        <img id="album-art" src="{{ cover_art_url }}" width="100%" height="100%" />
         {% endif %}
     </div>
     {% if display_id3_metadata %}
-    <div id="entry-metadata-container">
-        
+    <div>
         <h1 class="title">{{ title }}{% if starred %} {{ star_symbol }}{% endif %}</h1>
         <h2>{{ artist }}</h2>
         <h2>{{ album }}</h2>
+        {% if display_audio_format_info and audio_format_info %}
+            <h3>{{ audio_format_info }}</h3>
+        {% endif %}
     </div>
     {% endif %}
 </div>
 {% endblock %}
-

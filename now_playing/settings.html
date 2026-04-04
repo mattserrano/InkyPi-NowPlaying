@@ -19,15 +19,20 @@
     <input type="checkbox" id="displayID3Metadata" name="displayID3Metadata" checked class="form-input">
 </div>
 
+<div>
+    <label for="displayAudioFormatInfo" class="form-label">Display audio format information:</label>
+    <input type="checkbox" id="displayAudioFormatInfo" name="displayAudioFormatInfo" class="form-input">
+</div>
+
+<div class="form-group">
+    <label class="form-label">Star symbol:</label>
     <div class="form-group">
-        <label class="form-label" for="starSymbol">Star symbol:</label>
-        <div class="form-group">
-            <input type="radio" id="starSymbol" name="starSymbol" value="★">
-            <label>Star: ★</label>
-            <input type="radio" id="starSymbol" name="starSymbol" value="♥">
-            <label>Heart: ♥</label>
-        </div>
+        <input type="radio" id="starSymbol_star" name="starSymbol" value="★" checked>
+        <label for="starSymbolStar">Star: ★</label>
+        <input type="radio" id="starSymbol_heart" name="starSymbol" value="♥">
+        <label for="starSymbolHeart">Heart: ♥</label>
     </div>
+</div>
 
 <script>
     // populate form values from plugin settings
@@ -35,7 +40,7 @@
         if (loadPluginSettings) {
             document.getElementById('url').value = pluginSettings.url;
             document.getElementById('displayID3Metadata').checked = pluginSettings['displayID3Metadata'];
-            document.getElementById('displayStarred').checked = pluginSettings['displayStarred'];
+            document.getElementById('displayAudioFormatInfo').checked = pluginSettings['displayAudioFormatInfo'];
             document.getElementById('starSymbol').value = pluginSettings['starSymbol'];
         }
     });

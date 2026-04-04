@@ -5,30 +5,13 @@
 }
 
 .now-playing-container {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-  align-items: center;
-  width: 100%;
-  height: 100%;
-}
-
-.album-art-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
-  max-width: 50%;
-}
-
-.entry-metadata-container {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  gap: 1dvh;
   font-family: "Jost";
-  container-type: size;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr;
+  gap: 0px 5px;
+  grid-template-areas:
+    ". ."
 }
 
 .title {
