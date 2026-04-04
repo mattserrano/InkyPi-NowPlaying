@@ -4,6 +4,7 @@ An InkyPi plugin to display album art and song metadata.
 ## 🎵 Features
 
 - Display current album art and ID3 tag metadata from Subsonic music streaming servers
+- Display audio file format and bitrate
 - Supports plugin style settings to configure customizable text and backgrounds
 
 ## 📸 Screenshot
