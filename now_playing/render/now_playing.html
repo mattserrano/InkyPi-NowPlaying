@@ -2,7 +2,15 @@
 
 {% block content %}
 
+{% if not display_id3_metadata and not display_audio_format_info %}
 <div class="now-playing-container" style="--font-scale: {{ font_scale }};">
+    {% if cover_art_url %}
+    <img id="album-art" src="{{ cover_art_url }}" />
+    {% endif %}
+</div>
+
+{% else %}
+<div class="now-playing-grid" style="--font-scale: {{ font_scale }};">
     <div>
         {% if cover_art_url %}
         <img id="album-art" src="{{ cover_art_url }}" width="100%" height="100%" />
@@ -19,4 +27,6 @@
     </div>
     {% endif %}
 </div>
+{% endif %}
+
 {% endblock %}
