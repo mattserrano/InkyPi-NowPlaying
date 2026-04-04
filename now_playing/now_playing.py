@@ -83,6 +83,7 @@ class SubsonicProvider:
             "display_id3_metadata": settings.get("displayID3Metadata"),
             "display_audio_format_info": settings.get("displayAudioFormatInfo"),
             "audio_format_info": f"{now_playing.get('suffix', '').upper()} {now_playing.get('bitRate', '')}kbps" if now_playing else "",
+            'is_paused': now_playing is None,
             "font_scale": FONT_SIZES.get(settings.get('fontSize', 'normal'), 1),
             "plugin_settings": settings
         }

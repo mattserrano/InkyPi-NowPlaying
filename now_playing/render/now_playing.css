@@ -4,7 +4,11 @@
   padding: 0;
 }
 
-.now-playing-container {
+.now-playing {
+  font-family: "Jost";
+}
+
+.now-playing-full-screen {
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -14,11 +18,10 @@
 }
 
 .now-playing-grid {
-  font-family: "Jost";
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: 1fr;
-  gap: 0px 5px;
+  gap: 0px 10px;
   grid-template-areas:
     ". ."
 }
