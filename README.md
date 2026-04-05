@@ -9,9 +9,9 @@ An InkyPi plugin to display alhum cover art on Subsonic compatible media servers
 
 ## 📸 Screenshot
 
-<img width="1059" height="920" alt="Screenshot 2026-04-03 at 2 33 56 AM" src="https://github.com/user-attachments/assets/a52e93c7-e5fd-4479-a9bf-5c1ba36beef5" />
-<img width="899" height="829" alt="Screenshot 2026-04-03 at 2 35 18 AM" src="https://github.com/user-attachments/assets/015bca0d-ac9b-4626-a4b4-0cd9b7856996" />
+<img width="1001" height="467" alt="Screenshot 2026-04-05 at 12 17 16 PM" src="https://github.com/user-attachments/assets/02089d77-f576-4e36-a9b8-4813ebff6d71" />
 
+<img width="1000" height="816" alt="Screenshot 2026-04-05 at 12 19 45 PM" src="https://github.com/user-attachments/assets/f18928a8-3825-4493-a670-269f565bb39f" />
 
 ## 🛠️ Installation
 
