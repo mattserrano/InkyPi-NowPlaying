@@ -27,7 +27,7 @@ inkypi plugin install now_playing https://github.com/mattserrano/InkyPi-NowPlayi
 
 ## 💡 How it Works
 
-This InkyPi plugin retrieves now playing data from Subsonic servers and displays cover art and ID3 metadata on your Raspberry Pi's eInk display. It currently calls Subsonics' [getNowPlaying](https://docs.subsonic.org/pages/api.jsp#getNowPlaying) and [getCoverArt](https://docs.subsonic.org/pages/api.jsp#getCoverArt) REST APIs.
+This InkyPi plugin retrieves now playing data from Subsonic servers and displays cover art and ID3 metadata on your Raspberry Pi's eInk display. It currently calls Subsonics' [getNowPlaying](https://docs.subsonic.org/pages/api.jsp#getNowPlaying), [getAlbumList2](https://www.subsonic.org/pages/api.jsp#getAlbumList2) and [getCoverArt](https://docs.subsonic.org/pages/api.jsp#getCoverArt) REST APIs.
 
 REST API authentication is implemented with computed md5(password + salt) hashed request parameters.
 
