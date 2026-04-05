@@ -15,6 +15,15 @@
 </div>
 
 <div class="form-group">
+    <label for="layout" class="form-label">Cover art grid layout:</label>
+    <select id="coverArtGrid" name="coverLayout" class="form-input">
+        <option value="fullScreen">Full Screen</option>
+        <option value="largeGrid">Large Grid (6 most recent albums)</option>
+        <option value="compactGrid">Compact Grid (15 most recent albums)</option>
+    </select>
+</div>
+
+<div class="form-group">
     <label for="displayID3Metadata" class="form-label">Display song ID3 metadata:</label>
     <input type="checkbox" id="displayID3Metadata" name="displayID3Metadata" checked class="form-input">
 </div>
@@ -40,6 +49,7 @@
         if (loadPluginSettings) {
             document.getElementById('url').value = pluginSettings.url;
             document.getElementById('displayID3Metadata').checked = pluginSettings['displayID3Metadata'];
+            document.getElementById('coverArtGrid').value = pluginSettings['coverLayout'];
             document.getElementById('displayAudioFormatInfo').checked = pluginSettings['displayAudioFormatInfo'];
             document.getElementById('starSymbol').value = pluginSettings['starSymbol'];
         }

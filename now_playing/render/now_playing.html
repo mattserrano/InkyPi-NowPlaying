@@ -2,6 +2,17 @@
 
 {% block content %}
 
+<!-- Cover art grid layouts -->
+{% if cover_art_urls %}
+    <div class="now-playing now-playing-grid" style="--font-scale: {{ font_scale }};">
+        {% for url in cover_art_urls %}
+            <div>
+                <img src="{{ url }}" />
+            </div>
+        {% endfor %}
+{% endif %}
+
+<!-- Full screen layout -->
 {% if is_paused or (not display_id3_metadata and not display_audio_format_info) %}
 <div class="now-playing now-playing-full-screen" style="--font-scale: {{ font_scale }};">
     {% if cover_art_url %}
@@ -11,6 +22,7 @@
     {% endif %}
 </div>
 
+<!-- Grid layout with metadata -->
 {% else %}
 <div class="now-playing now-playing-grid" style="--font-scale: {{ font_scale }};">
     <div>

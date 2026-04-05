@@ -15,6 +15,9 @@ FONT_SIZES = {
     "x-large": 1.3
 }
 
+def shrink(dimensions, factor):
+    return (int(dimensions[0] * factor), int(dimensions[1] * factor))
+
 class SubsonicProvider:
     def __init__(self, base_url: str, username: str, password: str):
         self.base_url = base_url
@@ -32,6 +35,23 @@ class SubsonicProvider:
             "c": "Inky-Pi",
             "v": "1.8.0"
         }
+    
+    def get_recent_albums(self, limit=6):
+        url = f"{self.base_url}/rest/getAlbumList2"
+        params = self.request_params()
+        params["type"] = "recent"
+        params["size"] = limit
+
+        logger.info(f"Fetching recent albums from URL: {url}")
+        response = self.session.get(url, params=params, timeout=10)
+        response.raise_for_status()
+        data = response.json().get("subsonic-response")
+        
+        logger.info(f"Subsonic recent albums response: {data}")
+        assert data.get("status") == "ok", data.get("error", "Subsonic API returned an unknown error")
+        
+        albums = data.get("albumList2").get("album", [])
+        return albums
     
     def get_now_playing(self):
         url = f"{self.base_url}/rest/getNowPlaying"
@@ -66,27 +86,51 @@ class SubsonicProvider:
     
     def get_image(self,  dimensions, settings, renderer, resize=True):
         cover_art_url = None
-        now_playing = self.get_now_playing()
+        cover_layout = settings.get("coverLayout")
+        match cover_layout:
+            case "fullScreen":
+                now_playing = self.get_now_playing()
 
-        if now_playing and "coverArt" in now_playing:
-            cover_id = now_playing["coverArt"]
-            cover_art_url = self.get_cover_art_url(cover_id, dimensions)
+                if now_playing and "coverArt" in now_playing:
+                    cover_id = now_playing["coverArt"]
+                    cover_art_url = self.get_cover_art_url(cover_id, dimensions)
 
-        template_params = {
-            "title": now_playing.get("title") if now_playing else "No music playing",
-            "artist": now_playing.get("artist") if now_playing else "",
-            "album": now_playing.get("album") if now_playing else "",
-            "cover_art_url": cover_art_url,
-            "starred": now_playing.get("starred") if now_playing else "",
-            "star_symbol": settings.get("starSymbol", "★"),
-            "dimensions": dimensions,
-            "display_id3_metadata": settings.get("displayID3Metadata"),
-            "display_audio_format_info": settings.get("displayAudioFormatInfo"),
-            "audio_format_info": f"{now_playing.get('suffix', '').upper()} {now_playing.get('bitRate', '')}kbps" if now_playing else "",
-            'is_paused': now_playing is None,
-            "font_scale": FONT_SIZES.get(settings.get('fontSize', 'normal'), 1),
-            "plugin_settings": settings
-        }
+                template_params = {
+                    "title": now_playing.get("title") if now_playing else "No music playing",
+                    "artist": now_playing.get("artist") if now_playing else "",
+                    "album": now_playing.get("album") if now_playing else "",
+                    "cover_art_url": cover_art_url,
+                    "starred": now_playing.get("starred") if now_playing else "",
+                    "star_symbol": settings.get("starSymbol", "★"),
+                    "dimensions": dimensions,
+                    "display_id3_metadata": settings.get("displayID3Metadata"),
+                    "display_audio_format_info": settings.get("displayAudioFormatInfo"),
+                    "audio_format_info": f"{now_playing.get('suffix', '').upper()} {now_playing.get('bitRate', '')}kbps" if now_playing else "",
+                    'is_paused': now_playing is None,
+                    "font_scale": FONT_SIZES.get(settings.get('fontSize', 'normal'), 1),
+                    "plugin_settings": settings
+                }
+            case "largeGrid":
+                recent_albums = self.get_recent_albums(6)
+                cover_ids = [album.get("coverArt") for album in recent_albums if album.get("coverArt") is not None]
+                cover_art_urls = [self.get_cover_art_url(cover_id, shrink(dimensions, .3)) for cover_id in cover_ids]
+                template_params = {
+                    "cover_art_urls": cover_art_urls,
+                    "dimensions": dimensions,
+                    "plugin_settings": settings
+                }
+            case "compactGrid":
+                recent_albums = self.get_recent_albums(15)
+                cover_ids = [album.get("coverArt") for album in recent_albums if album.get("coverArt") is not None]
+                cover_art_urls = [self.get_cover_art_url(cover_id, shrink(dimensions, .18)) for cover_id in cover_ids]
+                template_params = {
+                    "cover_art_urls": cover_art_urls,
+                    "dimensions": dimensions,
+                    "plugin_settings": settings
+                }
+            case _:
+                logger.error(f"Unknown cover layout: {cover_layout}")
+                raise RuntimeError(f"Unsupported cover layout: {cover_layout}")
 
         image = renderer.render_image(dimensions, "now_playing.html", "now_playing.css", template_params)
         return image
