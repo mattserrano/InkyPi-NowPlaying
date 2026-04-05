@@ -16,7 +16,7 @@
 
 <div class="form-group">
     <label for="layout" class="form-label">Cover art grid layout:</label>
-    <select id="coverArtGrid" name="coverLayout" class="form-input">
+    <select id="coverArtGrid" name="coverLayout" class="form-input" onchange="updateMetadataFieldsVisibility(this.value)">
         <option value="fullScreen">Full Screen</option>
         <option value="largeGrid">Large Grid (6 most recent albums)</option>
         <option value="compactGrid">Compact Grid (15 most recent albums)</option>
@@ -44,6 +44,15 @@
 </div>
 
 <script>
+    // disable metadata fields if grid layout is largeGrid or compactGrid
+    function updateMetadataFieldsVisibility(layoutValue) {
+        const isGridLayout = layoutValue === 'largeGrid' || layoutValue === 'compactGrid';
+        document.getElementById('displayID3Metadata').disabled = isGridLayout;
+        document.getElementById('displayAudioFormatInfo').disabled = isGridLayout;
+        document.getElementById('starSymbol_star').disabled = isGridLayout;
+        document.getElementById('starSymbol_heart').disabled = isGridLayout;
+    }
+
     // populate form values from plugin settings
     document.addEventListener('DOMContentLoaded', () => {        
         if (loadPluginSettings) {
@@ -52,6 +61,8 @@
             document.getElementById('coverArtGrid').value = pluginSettings['coverLayout'];
             document.getElementById('displayAudioFormatInfo').checked = pluginSettings['displayAudioFormatInfo'];
             document.getElementById('starSymbol').value = pluginSettings['starSymbol'];
+            // update metadata fields visibility based on selected layout
+            updateMetadataFieldsVisibility(pluginSettings['coverLayout']);
         }
     });
 </script>
